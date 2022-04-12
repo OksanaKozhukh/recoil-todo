@@ -5,17 +5,19 @@ import { TodoItem } from './TodoItem';
 import { todoItemsState } from '../../state';
 
 export function TodoItemContainer({ item }) {
-  const [_todoItemsState, setTodoItemsState] = useRecoilState(todoItemsState);
-
+  const [todoItems, setTodoItems] = useRecoilState(todoItemsState);
   const editTodoItemText = (value) => {
-    setTodoItemsState(
-      getItemsWithUpdateItem(_todoItemsState, { ...item, text: value })
+    setTodoItems(
+      getItemsWithUpdateItem(todoItems, {
+        ...item,
+        text: value,
+      })
     );
   };
 
   const toggleItemCheck = () => {
-    setTodoItemsState(
-      getItemsWithUpdateItem(_todoItemsState, {
+    setTodoItems(
+      getItemsWithUpdateItem(todoItems, {
         ...item,
         isComplete: !item.isComplete,
       })
@@ -23,8 +25,8 @@ export function TodoItemContainer({ item }) {
   };
 
   const deleteItem = () => {
-    const newList = _todoItemsState.filter((_item) => _item.id !== item.id);
-    setTodoItemsState(newList);
+    const newList = todoItems.filter((todo) => todo.id !== item.id);
+    setTodoItems(newList);
   };
 
   return (
@@ -38,11 +40,12 @@ export function TodoItemContainer({ item }) {
   );
 }
 
-function getItemsWithUpdateItem(items, item) {
-  return items.map((_item) => {
-    if (_item.id === item.id) {
+const getItemsWithUpdateItem = (items, item) => {
+  return items.map((el) => {
+    if (el.id === item.id) {
       return item;
+    } else {
+      return el;
     }
-    return _item;
   });
-}
+};

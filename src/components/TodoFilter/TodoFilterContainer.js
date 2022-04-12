@@ -2,14 +2,12 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 import { TodoFilter } from './TodoFilter';
-import { todoItemsFilterState } from '../../state';
+import { todoItemFilterState } from '../../state';
 
 export function TodoFilterContainer() {
-  const [filter, setFilter] = useRecoilState(todoItemsFilterState);
+  const [filterValue, setFilterValue] = useRecoilState(todoItemFilterState);
 
-  const updateFilter = (value) => {
-    setFilter(value);
-  };
+  const updateFilter = (value) => setFilterValue(value);
 
-  return <TodoFilter value={filter} changeFilter={updateFilter} />;
+  return <TodoFilter value={filterValue} changeFilter={updateFilter} />;
 }

@@ -9,14 +9,9 @@ export function TodoFormContainer() {
   const setTodoList = useSetRecoilState(todoItemsState);
 
   function handleSubmit(text) {
-    setTodoList((oldTodoList) => [
-      ...oldTodoList,
-      {
-        id: uuid(),
-        text,
-        isComplete: false,
-      },
-    ]);
+    setTodoList((oldTodoList) => {
+      return [...oldTodoList, { id: uuid(), text, isComplete: false }];
+    });
   }
 
   return <TodoForm onSubmit={handleSubmit} />;

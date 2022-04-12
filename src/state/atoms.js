@@ -9,7 +9,7 @@ export const todoItemsState = atom({
   ],
 });
 
-export const todoItemsFilterState = atom({
-  key: 'todoItemsFilterState',
+export const todoItemFilterState = atom({
+  key: 'todoItemFilterState',
   default: 'All',
 });
